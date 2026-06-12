@@ -107,7 +107,7 @@ Implement a client-side single-page web application using plain HTML, CSS, and V
     - Style `.delete-btn` with a visible focus ring and sufficient touch target size (≥ 44×44px)
     - _Requirements: 8.3, 7.3_
 
-- [ ] 10. Final checkpoint — full integration and accessibility
+- [x] 10. Final checkpoint — full integration and accessibility
   - Verify all property-based tests pass with `npx fast-check` or equivalent test runner
   - Confirm no uncaught JS errors in browser console across Chrome, Firefox, Edge, and Safari
   - Confirm Chart.js CDN failure gracefully shows error without breaking other features
