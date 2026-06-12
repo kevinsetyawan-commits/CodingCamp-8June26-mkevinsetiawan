@@ -42,7 +42,7 @@ Implement a client-side single-page web application using plain HTML, CSS, and V
 
 
 
-- [ ] 5. Checkpoint — storage and validation foundation
+- [x] 5. Checkpoint — storage and validation foundation
   - Ensure `validateForm`, `loadTransactions`, and `saveTransactions` are implemented and all property tests written so far pass. Ask the user if any questions arise before continuing.
 
 - [x] 6. Implement Renderer module
@@ -90,7 +90,7 @@ Implement a client-side single-page web application using plain HTML, CSS, and V
     - Attaches `handleDeleteClick` to `#transaction-list`
     - _Requirements: 2.4, 5.3, 6.3, 7.7_
 
-- [ ] 8. Checkpoint — core functionality complete
+- [x] 8. Checkpoint — core functionality complete
   - Ensure all feature logic is wired end-to-end: add → save → render → delete → save → render. Run the full property test suite and confirm all 7 properties pass. Ask the user if any questions arise.
 
 - [x] 9. Style the application with CSS
