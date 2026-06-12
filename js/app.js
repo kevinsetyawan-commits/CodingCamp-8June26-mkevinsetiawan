@@ -234,9 +234,9 @@
    * @returns {string}
    */
   function formatCurrency(amount) {
-    return '$' + Number(amount).toLocaleString('en-US', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
+    return 'Rp\u00a0' + Number(amount).toLocaleString('id-ID', {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
     });
   }
 

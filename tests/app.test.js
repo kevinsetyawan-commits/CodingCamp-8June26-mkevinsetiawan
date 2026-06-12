@@ -54,9 +54,9 @@ function validateForm(name, amount, category) {
 }
 
 function formatCurrency(amount) {
-  return '$' + Number(amount).toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
+  return 'Rp\u00a0' + Number(amount).toLocaleString('id-ID', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
   });
 }
 
@@ -278,7 +278,7 @@ test('Property 3 — balance equals sum of all transaction amounts', () => {
 test('Property 3b — empty collection balance is 0', () => {
   const balance = computeBalance([]);
   assert.strictEqual(balance, 0);
-  assert.strictEqual(formatCurrency(balance), '$0.00');
+  assert.strictEqual(formatCurrency(balance), 'Rp\u00a00');
 });
 
 // ─── Property 4: Deleting a transaction removes it and reduces balance ────────
@@ -359,12 +359,12 @@ test('Property 6 — chart aggregation sums match transaction amounts per catego
       const grandTotal = totals.Food + totals.Transport + totals.Fun;
 
       // Category totals must sum to the same value as the overall balance.
-      // Use 1e-6 tolerance: two independent summation paths over the same values
-      // can diverge by more than 1e-9 when large magnitudes (e.g. 67108864) are
-      // mixed with small ones (e.g. 0.01), due to IEEE 754 rounding.
+      // Use 1e-4 tolerance: two independent summation paths over the same values
+      // can diverge significantly when totals approach ~2e9, due to IEEE 754
+      // rounding accumulating across many additions with large magnitude ratios.
       const balance = computeBalance(txArray);
       assert.ok(
-        Math.abs(grandTotal - balance) < 1e-6,
+        Math.abs(grandTotal - balance) < 1e-4,
         `category totals ${grandTotal} !== balance ${balance}`
       );
 
@@ -468,11 +468,11 @@ test('Property 7d — null from localStorage (no prior data) produces empty stat
 // ─── Static verification tests (non-PBT) ─────────────────────────────────────
 
 test('Static: formatCurrency formats known values correctly', () => {
-  assert.strictEqual(formatCurrency(0),          '$0.00');
-  assert.strictEqual(formatCurrency(12.5),        '$12.50');
-  assert.strictEqual(formatCurrency(1234567.89),  '$1,234,567.89');
-  assert.strictEqual(formatCurrency(0.01),        '$0.01');
-  assert.strictEqual(formatCurrency(999999999.99),'$999,999,999.99');
+  assert.strictEqual(formatCurrency(0),            'Rp\u00a00');
+  assert.strictEqual(formatCurrency(12.5),          'Rp\u00a013');
+  assert.strictEqual(formatCurrency(12500),         'Rp\u00a012.500');
+  assert.strictEqual(formatCurrency(1234567),       'Rp\u00a01.234.567');
+  assert.strictEqual(formatCurrency(999999999.99),  'Rp\u00a01.000.000.000');
 });
 
 test('Static: isValidTransactionShape accepts well-formed transactions', () => {
